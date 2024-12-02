@@ -23,19 +23,12 @@ for line in listFile:
     reportList = line.split()
 
     if is_sorted(reportList):
-        #print(f"Sorted report: {reportList}")
-        #continue
         safe = True
         for i in range(len(reportList) - 1):
-            #print(f"Comparing {reportList[i + 1]} and {reportList[i]}: Diff is {abs(int(reportList[i + 1]) - int(reportList[i]))}")
             if abs(int(reportList[i + 1]) - int(reportList[i])) < MIN_SAFE or abs(int(reportList[i + 1]) - int(reportList[i])) > MAX_SAFE:
                 safe = False
-                #print(f"Unsafe report (variance): {reportList}")
                 break
         if safe:
-            #print(f"Safe report: {reportList}")
             safeCount += 1
-#    else:
-#        print(f"Unsafe report (not sorted): {reportList}")
 
 print(f"Number of safe reports: {safeCount}")
