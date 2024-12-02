@@ -35,5 +35,13 @@ for line in listFile:
 
     if is_sorted(reportList) and is_safe(reportList):
         safeCount += 1
+    else:
+        # Remove one item from the list and check again; we can accept one "out of bound" value
+        for i in range(len(reportList)):
+            shortList = reportList.copy()
+            shortList.pop(i)
+            if is_sorted(shortList) and is_safe(shortList):
+                safeCount += 1
+                break
 
 print(f"Number of safe reports: {safeCount}")
