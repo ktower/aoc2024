@@ -8,10 +8,13 @@
 MIN_SAFE = 1
 MAX_SAFE = 3
 
+def list_to_int(list):
+    return [int(i) for i in list]
+
 def is_sorted(lst):
-    if all(int(lst[i]) <= int(lst[i + 1]) for i in range(len(lst) - 1)):
+    if all(lst[i] <= lst[i + 1] for i in range(len(lst) - 1)):
         return True  # List is sorted in increasing order
-    if all(int(lst[i]) >= int(lst[i + 1]) for i in range(len(lst) - 1)):
+    if all(lst[i] >= lst[i + 1] for i in range(len(lst) - 1)):
         return True  # List is sorted in decreasing order
     return False  # List is not sorted
 
@@ -20,12 +23,12 @@ listFile = open("day2-input.txt", "r")
 safeCount = 0
 
 for line in listFile:
-    reportList = line.split()
+    reportList = list_to_int(line.split())
 
     if is_sorted(reportList):
         safe = True
         for i in range(len(reportList) - 1):
-            if abs(int(reportList[i + 1]) - int(reportList[i])) < MIN_SAFE or abs(int(reportList[i + 1]) - int(reportList[i])) > MAX_SAFE:
+            if abs(reportList[i + 1] - reportList[i]) < MIN_SAFE or abs(reportList[i + 1] - reportList[i]) > MAX_SAFE:
                 safe = False
                 break
         if safe:
