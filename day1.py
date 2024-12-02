@@ -20,11 +20,16 @@ if len(list1) != len(list2):
     exit()
 
 listdiff = 0
+listsimilarity = 0
 
 for i in range(len(list1)):
     if list1[i] > list2[i]:
         listdiff += list1[i] - list2[i]
     else:
         listdiff += list2[i] - list1[i]
+    
+    # Calculate list similarity score
+    listsimilarity += list1[i] * list2.count(list1[i])
 
 print("The sum of the differences between the two lists is", listdiff)
+print("The similarity score of the two lists is", listsimilarity)
