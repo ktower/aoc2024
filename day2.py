@@ -18,6 +18,14 @@ def is_sorted(lst):
         return True  # List is sorted in decreasing order
     return False  # List is not sorted
 
+def is_safe(lst):
+    safe = True
+    for i in range(len(lst) - 1):
+        if abs(lst[i + 1] - lst[i]) < MIN_SAFE or abs(lst[i + 1] - lst[i]) > MAX_SAFE:
+            safe = False
+            break
+    return safe
+
 listFile = open("day2-input.txt", "r")
 
 safeCount = 0
@@ -25,13 +33,7 @@ safeCount = 0
 for line in listFile:
     reportList = list_to_int(line.split())
 
-    if is_sorted(reportList):
-        safe = True
-        for i in range(len(reportList) - 1):
-            if abs(reportList[i + 1] - reportList[i]) < MIN_SAFE or abs(reportList[i + 1] - reportList[i]) > MAX_SAFE:
-                safe = False
-                break
-        if safe:
-            safeCount += 1
+    if is_sorted(reportList) and is_safe(reportList):
+        safeCount += 1
 
 print(f"Number of safe reports: {safeCount}")
