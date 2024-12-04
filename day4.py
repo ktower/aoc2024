@@ -1,5 +1,8 @@
 ## https://adventofcode.com/2024/day/4
-## Find "XMAS" anywhere in the input file
+## Part 1: Find "XMAS" in any direction anywhere in the input file
+## Part 2: Find "MAS" in the form of an X anywhere in the input file
+## The input file is a word search puzzle
+
 from enum import Enum
 
 class Direction(Enum):
@@ -12,9 +15,7 @@ class Direction(Enum):
     LEFT = 7
     UP_LEFT = 8
 
-TARGET_STRING = "XMAS"
 WORDSEARCH_SOURCE = []
-TARGET_FIND_COUNT = 0
 
 def find_target_string(source: list[str], target: str, target_index: int, cur_x: int, cur_y: int, dir: Direction) -> bool:
     # So far so good, the current character matches the target character, keep looking in the same direction
@@ -47,11 +48,14 @@ if __name__ == "__main__":
     wordSearchFile = open("day4-input.txt", "r")
     WORDSEARCH_SOURCE = wordSearchFile.readlines()
     wordSearchFile.close()
-    #print(f"Read in word search file with {len(WORDSEARCH_SOURCE)} lines")
+
+    # Part 1: Find all of the "XMAS" strings in the word search
+    targetString = "XMAS"
+    targetFindCount = 0
     for x in range(len(WORDSEARCH_SOURCE)):
         for y in range(len(WORDSEARCH_SOURCE[x])):
             for dir in Direction:
-                if find_target_string(WORDSEARCH_SOURCE, TARGET_STRING, 0, x, y, dir):
-                    TARGET_FIND_COUNT += 1
+                if find_target_string(WORDSEARCH_SOURCE, targetString, 0, x, y, dir):
+                    targetFindCount += 1
     
-    print(TARGET_FIND_COUNT)
+    print(f"Part 1 - Number of 'XMAS' instances in puzzle: {targetFindCount}")
