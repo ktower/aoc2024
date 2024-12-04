@@ -1,5 +1,8 @@
 import re
 
+## Some logic roughly based on:
+## https://github.com/danielenricocahall/AdventOfCode2024/blob/main/day_3/solution.py
+
 MUL_RE = re.compile(r"mul\((\d+),(\d+)\)")
 DO_RE = re.compile(r"do\(\)")
 DONT_RE = re.compile(r"don't\(\)")
